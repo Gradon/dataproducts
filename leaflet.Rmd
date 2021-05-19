@@ -1,0 +1,25 @@
+---
+title: "Leaflet Project"
+author: "Gradon Kam"
+date: "5/19/2021"
+output: html_document
+---
+
+## Leaflet Map Page
+This page shows a map of some good pickup game parks around Houston, TX.
+
+
+```{r start, echo=FALSE}
+library(leaflet)
+parks <- data.frame(name = c("Love Park", "Godwin Park", "Memorial Park", "Hermann Park", "Montie Beach Park"),
+                    lat = c(29.793818, 29.672229, 29.764306, 29.720483, 29.800291),
+                    lng = c(-95.407788, -95.468602, -95.445741, -95.390386, -95.380743),
+                    cols = c("green", "green", "red", "red", "red")
+                    )
+themap <- parks %>% 
+          leaflet() %>% 
+          addTiles() %>% 
+          addCircleMarkers(label = parks$name, color = parks$cols) %>%
+          addLegend(labels = c("weekends", "weekdays"), colors = c("green", "red"))
+themap
+```
